@@ -1,0 +1,141 @@
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #d5d3e4, #5e6c8a); /* Light Blue + Blackish */
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar */
+header {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 0;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: rgb(26, 23, 23);
+    font-weight: lighter;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* Main Blog Section */
+.main-blog {
+    display: flex;
+    align-items: center;
+    justify-content:center ;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    max-width: 80%;
+}
+
+.main-blog img {
+    width: 50%;
+    height: 50%;
+    border-radius: 20px;
+}
+
+.blog-content {
+    width: 45%;
+    color: #171515;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.blog-content h1 {
+    font-size: 24px;
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: lighter;
+
+}
+
+.blog-content p {
+    font-size: 16px;
+    color: #171515;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #807497;
+    color: rgb(7, 7, 7);
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.read-more:hover {
+    background-color: #d8572a;
+}
+
+
+
+/* Scrollable Blog Grid */
+.blog-grid {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Each Row of 2 Boxes */
+.blog-row {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Blog Cards */
+.blog-card {
+    width: 400px;
+    height: 350px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-content {
+    padding: 15px;
+}
+
+.blog-content h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.blog-content p {
+    font-size: 14px;
+    color: #181717;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
