@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pattern Challenge Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-color: #6c5ce7;
+            --secondary-color: #ff7675;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Comic Neue', cursive;
+        }
+
+        .header {
+            width: 100%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .game-info {
+            font-size: 1.2em;
+            color: #4a4a4a;
+            display: flex;
+            gap: 20px;
+        }
+
+        .game-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .box {
+            width: 110px;
+            height: 110px;
+            background: #ffffff;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .element {
+            width: 40px;
+            height: 40px;
+            margin: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+        }
+
+        .result-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #6c5ce7;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #5b4bc4;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="game-info">
+            ⏳ <span id="time">60</span> | 
+            ★ <span id="score">0</span> |
+            ❌ <span id="wrong">0</span>
+        </div>
+        <button onclick="toggleHelp()">❓ Help</button>
+    </div>
+
+    <div class="game-container" id="gameContainer"></div>
+    <div class="overlay" id="overlay"></div>
+    <div class="result-popup" id="resultPopup">
+        <h2>Game Over! 🎮</h2>
+        <p>Final Score: <span id="finalScore">0</span></p>
+        <p>Correct Answers: <span id="finalCorrect">0</span></p>
+        <p>Wrong Attempts: <span id="finalWrong">0</span></p>
+        <button onclick="restartGame()">Play Again 🔄</button>
+    </div>
+
+    <script>
+        const patterns = {
+            emoji: ['🎃', '👻', '🎄', '🎅'],
+            shape: ['🔴', '🔺', '⬢', '⭐'],
+            color: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ff7675']
+        };
+
+        let gameState = {
+            score: 0,
+            correct: 0,
+            wrong: 0,
+            timeLeft: 60,
+            difficulty: 1,
+            currentDifferent: -1,
+            timerId: null,
+            activeType: 'emoji'
+        };
+
+        function createGame() {
+            const container = document.getElementById('gameContainer');
+            container.innerHTML = '';
+            
+            gameState.activeType = Object.keys(patterns)[Math.floor(Math.random() * Object.keys(patterns).length)];
+            gameState.difficulty = Math.floor(gameState.score / 30) + 1;
+            const elementsPerBox = Math.min(gameState.difficulty, 4);
+
+            // Create boxes
+            for (let i = 0; i < 9; i++) {
+                const box = document.createElement('div');
+                box.className = 'box';
+                box.onclick = checkAnswer;
+                box.dataset.index = i;
+                
+                // Create elements
+                for (let j = 0; j < elementsPerBox; j++) {
+                    const element = document.createElement('div');
+                    element.className = 'element';
+                    box.appendChild(element);
+                }
+                
+                container.appendChild(box);
+            }
+
+            gameState.currentDifferent = Math.floor(Math.random() * 9);
+            applyPatterns();
+        }
+
+        function applyPatterns() {
+            const boxes = document.querySelectorAll('.box');
+            const baseItems = patterns[gameState.activeType];
+            const basePattern = baseItems[0];
+            const differentPattern = baseItems[1];
+
+            boxes.forEach((box, index) => {
+                const elements = box.querySelectorAll('.element');
+                const isDifferent = index === gameState.currentDifferent;
+
+                elements.forEach((element, i) => {
+                    if (gameState.activeType === 'color') {
+                        element.style.backgroundColor = isDifferent && i === 0 ? differentPattern : basePattern;
+                        element.textContent = '';
+                    } else {
+                        element.textContent = isDifferent && i === 0 ? differentPattern : basePattern;
+                        element.style.backgroundColor = '';
+                    }
+                });
+            });
+        }
+
+        function checkAnswer(event) {
+            const clickedBox = event.currentTarget;
+            const isCorrect = parseInt(clickedBox.dataset.index) === gameState.currentDifferent;
+
+            if (isCorrect) {
+                gameState.score += 10;
+                gameState.correct++;
+                gameState.timeLeft = Math.min(gameState.timeLeft + 1, 60);
+            } else {
+                gameState.wrong++;
+                gameState.score = Math.max(gameState.score - 5, 0);
+                gameState.timeLeft = Math.max(gameState.timeLeft - 2, 0);
+            }
+
+            updateDisplay();
+            createGame();
+        }
+
+        function updateDisplay() {
+            document.getElementById('score').textContent = gameState.score;
+            document.getElementById('wrong').textContent = gameState.wrong;
+            document.getElementById('time').textContent = gameState.timeLeft;
+        }
+
+        function startTimer() {
+            gameState.timerId = setInterval(() => {
+                gameState.timeLeft--;
+                updateDisplay();
+                
+                if (gameState.timeLeft <= 0) {
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        function endGame() {
+            clearInterval(gameState.timerId);
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('resultPopup').style.display = 'block';
+            document.getElementById('finalScore').textContent = gameState.score;
+            document.getElementById('finalCorrect').textContent = gameState.correct;
+            document.getElementById('finalWrong').textContent = gameState.wrong;
+        }
+
+        function restartGame() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('resultPopup').style.display = 'none';
+            gameState = {
+                score: 0,
+                correct: 0,
+                wrong: 0,
+                timeLeft: 60,
+                difficulty: 1,
+                currentDifferent: -1,
+                timerId: null,
+                activeType: 'emoji'
+            };
+            updateDisplay();
+            createGame();
+            startTimer();
+        }
+
+        function toggleHelp() {
+            alert(`HOW TO PLAY:
+            - Find the box with a different first element
+            - Correct answer: +10 points & +1 second
+            - Wrong answer: -5 points & -2 seconds
+            - Difficulty increases every 30 points
+            - Game ends when time reaches 0`);
+        }
+
+        // Start the game
+        createGame();
+        startTimer();
+    </script>
+</body>
+</html>
