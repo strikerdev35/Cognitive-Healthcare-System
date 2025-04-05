@@ -1,0 +1,179 @@
+:root {
+    --primary-color: #34a0d5;
+    --secondary-color: #e6f1ff;
+    --text-color: #14374e;
+    --light-blue: #cae3ff;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+}
+
+.breathing-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 30px;
+    margin: 0 auto;
+}
+
+.title {
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+}
+
+.exercise-container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .exercise-container {
+        flex-direction: column;
+    }
+}
+
+.visual-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-blue);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    min-height: 350px;
+}
+
+.character-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 220px;
+}
+
+.character {
+    width: 150px;
+    height: 150px;
+    transition: all 0.5s ease-in-out;
+}
+
+.timer-circle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: var(--primary-color);
+    right: 20%;
+    bottom: 20%;
+}
+
+.progress-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: var(--primary-color);
+}
+
+.instructions-container {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.instruction-step {
+    margin-bottom: 20px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.instruction-step.active {
+    opacity: 1;
+}
+
+.instruction-step p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.done-container {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+}
+
+#done-button {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 40px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#done-button:hover {
+    background-color: #2889b9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+#done-button:active {
+    transform: translateY(0);
+}
+
+/* Animation classes */
+@keyframes breatheIn {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
+}
+
+@keyframes breatheHold {
+    from { transform: scale(1.2); }
+    to { transform: scale(1.2); }
+}
+
+@keyframes breatheOut {
+    from { transform: scale(1.2); }
+    to { transform: scale(1); }
+}

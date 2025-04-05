@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathing Exercise</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="sho.css">
+</head>
+<body>
+    <div class="container">
+        <div class="breathing-card">
+            <h1 class="title">For More Cool, Calm, and Collectedness</h1>
+            
+            <div class="exercise-container">
+                <div class="visual-container">
+                    <div class="character-container">
+                        <div id="character-animation">
+                            <img id="character-image" src="{{ url_for('static', filename='svg/character-rest.svg') }}" alt="Character" class="character">
+                        </div>
+                        <div class="timer-circle">
+                            <span id="current-step">1</span>
+                        </div>
+                    </div>
+                    <div class="progress-dots">
+                        <span class="dot active" data-step="1"></span>
+                        <span class="dot" data-step="2"></span>
+                        <span class="dot" data-step="3"></span>
+                        <span class="dot" data-step="4"></span>
+                        <span class="dot" data-step="5"></span>
+                        <span class="dot" data-step="6"></span>
+                    </div>
+                </div>
+                
+                <div class="instructions-container">
+                    <div class="instruction-step" id="step1">
+                        <p><strong>1.</strong> Take a seat in an upright position.</p>
+                    </div>
+                    <div class="instruction-step" id="step2">
+                        <p><strong>2.</strong> Move your left arm until (almost) fully stretched infront of the right side of your chest and right shoulder.</p>
+                    </div>
+                    <div class="instruction-step" id="step3">
+                        <p><strong>3.</strong> Grip onto your left upper arm with your right hand and apply light pressure. Hold this position for 15 seconds.</p>
+                    </div>
+                    <div class="instruction-step" id="step4">
+                        <p><strong>4.-6.</strong> Change sides and repeat the first three steps.</p>
+                    </div>
+                    <div class="instruction-step" id="step5">
+                        <p> And now you can continue your day with less tension in this region!</p>
+                    </div>
+                    
+                    <div class="done-container">
+                        <button id="done-button" class="btn btn-primary">DONE!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="sho.js"></script>
+</body>
+</html>

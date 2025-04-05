@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Brain Exercises</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <nav class="container">
+        <div class="logo">
+          <a href="/">
+            <span class="logo-text">Cognify Care</span>
+          </a>
+        </div>
+
+        <div class="nav-links">
+          <a href="#" class="nav-link">Training</a>
+          <a href="#" class="nav-link">Progress</a>
+          <a href="#" class="nav-link">Exercises</a>
+          <a href="#" class="nav-link">Blog</a>
+        </div>
+
+        <div class="user-info">
+          <span class="user-email">Profile</span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">Booster for Body & Mind</h1>
+          <p class="hero-description">Mini-exercises to refresh your brain in the middle of a tiring day</p>
+        </div>
+        <div class="hero-visual">
+          <div class="brain-visualization">
+            <div id="brain-container"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      <div class="container">
+        <div class="tab-buttons">
+          <button id="body-tab" class="tab-button active">
+            <i data-lucide="user"></i>
+            <span>Body</span>
+          </button>
+          <button id="mind-tab" class="tab-button">
+            <i data-lucide="brain"></i>
+            <span>Mind</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise Sections -->
+    <section id="body-exercises" class="exercises-section">
+      <div class="container">
+        <p class="section-desc">Mini-exercises to refresh your body in the middle of a tiring day</p>
+        <div class="exercises-grid" id="body-exercises-grid">
+          <!-- Body exercises will be populated here via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <section id="mind-exercises" class="exercises-section hidden">
+      <div class="container">
+        <p class="section-desc">Mini-exercises to refresh your mind in the middle of a tiring day</p>
+        <div class="exercises-grid" id="mind-exercises-grid">
+          <!-- Mind exercises will be populated here via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <i data-lucide="facebook"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <i data-lucide="twitter"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Youtube">
+              <i data-lucide="youtube"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i data-lucide="instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
