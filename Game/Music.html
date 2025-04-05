@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --primary: #133149;
+      --primary-light: #9709f6;
+      --neutral-800: #333333;
+      --neutral-600: #666666;
+      --neutral-200: #EEEEEE;
+      --white: #FFFFFF;
+      --radius: 1.5rem;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --transition: 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.5;
+      color: var(--neutral-800);
+      background-color: #f9f9f9;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Header Styles */
+    .header {
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      padding: 0.75rem 0;
+    }
+
+    .header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      color: var(--neutral-600);
+      font-weight: 500;
+      transition: color var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .user-info {
+      font-size: 0.875rem;
+      color: var(--neutral-600);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to right, var(--primary), var(--primary-light));
+      color: var(--white);
+      padding: 5rem 0;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Cards Section */
+    .activities-section {
+      padding: 4rem 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      color: var(--neutral-600);
+      font-size: 1.1rem;
+    }
+
+    /* Horizontal Scroll Cards */
+    .cards-container {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding: 1rem 0;
+      
+    }
+/* Add to existing CSS */
+.cards-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  margin-bottom: -15px;
+}
+
+.cards-container::-webkit-scrollbar {
+  display: none;
+}
+    .activity-card {
+      flex: 0 0 280px;
+      background: var(--white);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform var(--transition);
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+    }
+
+    .activity-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-title {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-description {
+      color: var(--neutral-600);
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+
+    .card-button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: var(--white);
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      margin-top: auto;
+      width: fit-content;
+    }
+
+    .card-button:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+
+    /* Image Cards Grid */
+    .three-column-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .image-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform var(--transition);
+    }
+
+    .image-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-headline {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-subheadline {
+      color: var(--neutral-600);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Scrollbar Styling */
+    
+
+
+
+
+
+    /* Footer */
+    .footer {
+      background-color: var(--white);
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--neutral-200);
+      margin-top: auto;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-link {
+      color: var(--neutral-600);
+      transition: color var(--transition);
+    }
+
+    .social-link:hover {
+      color: var(--primary);
+    }
+
+    .language-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .flag-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header .container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .hero {
+        padding: 3rem 0;
+        min-height: 250px;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.75rem;
+      }
+
+      .activity-card {
+        flex: 0 0 260px;
+      }
+
+      .three-column-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-image {
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <nav class="container">
+        <div class="logo">
+          <a href="/">
+            <span class="logo-text">Cognify Care</span>
+          </a>
+        </div>
+
+        <div class="nav-links">
+          <a href="#" class="nav-link">Training</a>
+          <a href="#" class="nav-link">Progress</a>
+          <a href="#" class="nav-link">Exercises</a>
+          <a href="#" class="nav-link">Blog</a>
+        </div>
+
+        <div class="user-info">
+          <span class="user-email">Profile</span>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero-title">Music</h1>
+        <p class="hero-description">Music for your stress relief</p>
+      </div>
+    </section>
+
+    <section class="activities-section">
+      
+
+        <!-- Horizontal Scroll Cards -->
+        <div class="cards-container">
+          <div class="activity-card">
+            <img src="" alt="">
+            <h3 class="card-title">Pastoral</h3>
+            <button class="card-button">Play</button>
+          </div>
+
+          <div class="activity-card">
+            <img src="" alt="">
+            <h3 class="card-title">Beach</h3>
+            <button class="card-button">Play</button>
+          </div>
+
+          <div class="activity-card">
+            <img src="" alt="">
+            <h3 class="card-title">Summer Night</h3>
+            <button class="card-button">Play</button>
+          </div>
+
+          <div class="activity-card">
+            <img src="" alt="">
+            <h3 class="card-title">Campfire</h3>
+            <button class="card-button">Play</button>
+          </div>
+        </div>
+
+        <!-- Image Cards Grid -->
+        <div class="cards-container">
+            <div class="activity-card">
+            <img src="" alt="">
+            <h3 class="card-title">Breath of the wild</h3>
+            <button class="card-button">Play</button>
+          </div>
+  
+          <div class="activity-card">
+            <img src="" alt="">
+            <h3 class="card-title">Rain</h3>
+            <button class="card-button">Play</button>
+          </div>
+
+           <div class="activity-card">
+            <img src="" alt="">
+            <h3 class="card-title">Wind Chime</h3>
+            <button class="card-button">Play</button>
+          </div>
+  
+            
+          </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <i class="icon" data-lucide="facebook"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <i class="icon" data-lucide="twitter"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="YouTube">
+              <i class="icon" data-lucide="youtube"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i class="icon" data-lucide="instagram"></i>
+            </a>
+          </div>
+          
+          
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
