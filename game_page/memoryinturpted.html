@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Interrupted</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .game-header {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem;
+        }
+
+        .card {
+            width: 120px;
+            height: 150px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .card-front {
+            background-color: #4A5568;
+            transform: rotateY(0deg);
+        }
+
+        .card-back {
+            background-color: #2D3748;
+            color: #48BB78;
+            transform: rotateY(180deg);
+        }
+
+        .interrupted-message {
+            color: #F56565;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .restart-btn {
+            padding: 0.8rem 1.5rem;
+            font-size: 1.1rem;
+            background-color: #4299E1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: background-color 0.3s;
+        }
+
+        .restart-btn:hover {
+            background-color: #3182CE;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-header">
+        <h1>Memory Interrupted</h1>
+        <div class="moves-counter">Moves: <span id="moves">0</span></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="interrupted-message" id="interruptedMessage">MEMORY INTERRUPTED</div>
+    <button class="restart-btn" onclick="startGame()">New Game</button>
+
+    <script>
+        const pairs = ['B', '2 + 8', 'MEMORY INTERRUPTED'];
+        let cards = [...pairs, ...pairs];
+        let flippedCards = [];
+        let moves = 0;
+        let blocked = false;
+
+        function createCard(content) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            const cardInner = document.createElement('div');
+            cardInner.className = 'card-inner';
+            
+            const cardFront = document.createElement('div');
+            cardFront.className = 'card-front';
+            cardFront.textContent = '?';
+            
+            const cardBack = document.createElement('div');
+            cardBack.className = 'card-back';
+            cardBack.textContent = content;
+            
+            cardInner.appendChild(cardFront);
+            cardInner.appendChild(cardBack);
+            card.appendChild(cardInner);
+            
+            card.addEventListener('click', () => handleCardClick(card, content));
+            return card;
+        }
+
+        function handleCardClick(card, content) {
+            if (blocked || card.classList.contains('flipped')) return;
+
+            card.classList.add('flipped');
+            flippedCards.push({ card, content });
+
+            if (flippedCards.length === 2) {
+                moves++;
+                document.getElementById('moves').textContent = moves;
+                blocked = true;
+
+                if (flippedCards[0].content === flippedCards[1].content) {
+                    flippedCards = [];
+                    blocked = false;
+                    checkWin();
+                } else {
+                    showInterruptedMessage();
+                    setTimeout(() => {
+                        flippedCards.forEach(({ card }) => card.classList.remove('flipped'));
+                        flippedCards = [];
+                        blocked = false;
+                    }, 1500);
+                }
+            }
+        }
+
+        function showInterruptedMessage() {
+            const message = document.getElementById('interruptedMessage');
+            message.style.display = 'block';
+            setTimeout(() => message.style.display = 'none', 1500);
+        }
+
+        function checkWin() {
+            if (document.querySelectorAll('.flipped').length === cards.length) {
+                setTimeout(() => {
+                    alert(`System Restored! You won in ${moves} moves!`);
+                    startGame();
+                }, 500);
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function startGame() {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+            flippedCards = [];
+            moves = 0;
+            blocked = false;
+            document.getElementById('moves').textContent = '0';
+            
+            shuffleArray(cards);
+            cards.forEach(content => {
+                grid.appendChild(createCard(content));
+            });
+        }
+
+        startGame();
+    </script>
+</body>
+</html> 

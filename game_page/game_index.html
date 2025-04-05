@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Brain Exercises</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <nav class="container">
+        <div class="logo">
+          <a href="/">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"></path>
+              <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" stroke="currentColor" stroke-width="2"></path>
+              <path d="M12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z" fill="currentColor"></path>
+            </svg>
+            <span class="logo-text">Cognifi care</span>
+          </a>
+        </div>
+
+        <div class="nav-links">
+          <a href="#" class="nav-link">Training</a>
+          <a href="#" class="nav-link">Progress</a>
+          <a href="#" class="nav-link">Exercise</a>
+          
+          <a href="#" class="nav-link">Blog</a>
+        </div>
+
+        <div class="user-info">
+          <span class="user-email">Profile</span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">Games for  cognitive</h1>
+          <p class="hero-description"> 🎮 Let's make learning an adventure with these cognitive-boosting games</p>
+        </div>
+        <div class="hero-visual">
+          <div class="brain-visualization">
+            <div id="brain-container"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      <div class="container">
+        <div class="tab-buttons">
+          <button id="body-tab" class="tab-button active">
+            <i data-lucide="user"></i>
+            <span>Reasoning</span>
+          </button>
+          <button id="mind-tab" class="tab-button">
+            <i data-lucide="brain"></i>
+            <span>Memory</span>
+          </button>
+          <button id="mind-tab" class="tab-button">
+            <i data-lucide="brain"></i>
+            <span>attention</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise Sections -->
+    <section id="body-exercises" class="exercises-section">
+      <div class="container">
+        <p class="section-desc">Unlocking my inner detective with these reasoning games! 🕵️‍♀️</p>
+        <div class="exercises-grid" id="body-exercises-grid">
+          <!-- Body exercises will be populated here via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <section id="mind-exercises" class="exercises-section hidden">
+      <div class="container">
+        <p class="section-desc">Let's see who has the best memory in this game! 🏆</p>
+        <div class="exercises-grid" id="mind-exercises-grid">
+          <!-- Mind exercises will be populated here via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <i data-lucide="facebook"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <i data-lucide="twitter"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Youtube">
+              <i data-lucide="youtube"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i data-lucide="instagram"></i>
+            </a>
+          </div>
+          <div class="language-selector">
+            <img src="https://img.icons8.com/color/48/000000/usa.png" alt="USA flag" class="flag-icon">
+            <span>English</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
