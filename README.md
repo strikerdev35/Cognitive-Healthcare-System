@@ -1,4 +1,6 @@
 # Cognitive-Healthcare-System
 <p align="center">
-  <img src="https://github.com/strikerdev35/Cognitive-Healthcare-System/blob/main/Screenshot%202025-06-24%20195116.png">
+  <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank">
+    <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg" width="600" alt="Watch the video" />
+  </a>
 </p>
